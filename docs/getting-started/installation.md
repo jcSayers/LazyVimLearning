@@ -2,6 +2,8 @@
 
 This page covers installing Vim or Neovim on Windows, macOS, and Linux.
 
+> **Tip**: Use the **Vim/Neovim toggle** in the top-left navbar to switch between editor-specific content! The toggle will update installation instructions and configuration examples based on your choice.
+
 ## Vim vs Neovim: Which Should I Install?
 
 ### **Choose Vim if:**

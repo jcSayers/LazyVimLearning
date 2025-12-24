@@ -213,6 +213,37 @@ pre {
   }
 }
 
+/* Editor toggle styles */
+.editor-toggle {
+  margin-right: 1rem;
+  display: flex;
+  gap: 0.5rem;
+}
+
+.toggle-btn {
+  padding: 0.4rem 1rem;
+  background: transparent;
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--vp-c-text-2);
+  transition: all 0.3s ease;
+}
+
+.toggle-btn:hover {
+  color: var(--vp-c-text-1);
+  border-color: var(--vp-c-brand);
+}
+
+.toggle-btn.active {
+  background: var(--vp-c-brand);
+  color: white;
+  border-color: var(--vp-c-brand);
+  font-weight: 600;
+}
+
 /* Print styles */
 @media print {
   .cm-editor,

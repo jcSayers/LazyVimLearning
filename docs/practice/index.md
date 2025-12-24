@@ -1,170 +1,147 @@
 # Practice Hub: Learn by Doing
 
-Welcome to the interactive practice section! Here you'll test your Vim skills with real challenges. Learn by doing!
+Welcome to the **interactive practice arena**! Here you'll test your Vim skills with real, hands-on challenges that feel like games.
 
-## How the Game Works
+## How It Works
 
-1. **Read the Challenge** - Understand what you need to do
-2. **Type Commands** - Use real Vim commands in the editor
-3. **Get Feedback** - See if your solution is correct
-4. **Learn** - Each challenge teaches a specific concept
+These are **actual interactive challenges**, not videos or tutorials:
+
+1. **Pick a challenge** - See all available challenges at your skill level
+2. **Edit text** to match the goal
+3. **Get instant feedback** - The system tells you if you're correct
+4. **Use hints** if stuck (progressive help)
+5. **Track your progress** - Build confidence as you complete challenges
+
+Your **progress is saved** in your browser and persists across sessions!
 
 ## Challenge Levels
 
-### Beginner Level
-Perfect for learning the basics:
-- Navigation (hjkl, w, b, e)
+### 🟢 Beginner Level
+
+Perfect for learning the fundamentals:
+- Basic navigation (hjkl, w, b, e)
 - Editing (insert, delete, change)
 - Copy and paste
+- Simple text manipulation
 
-**Time commitment**: 30-45 minutes
-**Prerequisites**: Understand modes (from Fundamentals)
+**Time to complete**: 30-45 minutes
+**Skills needed**: Just understand modes
 
-### Intermediate Level
+👉 **[Start Beginner Challenges](/practice/beginner-challenges)**
+
+### 🟡 Intermediate Level
+
 Build on your fundamentals:
-- Text objects (iw, aw, i", etc)
-- Combining operators with motions
-- Advanced searching
+- Text objects (iw, aw, i", etc.)
+- Complex operator + motion combinations
+- Advanced searching and replacing
+- Multi-line operations
 
-**Time commitment**: 45-60 minutes
-**Prerequisites**: Comfortable with basic editing
+**Time to complete**: 45-60 minutes
+**Skills needed**: Complete beginner level first
 
-### Advanced Level
-Master complex operations:
-- Macros and registers
+👉 **[Explore Intermediate Challenges](/practice/intermediate-challenges)** (Coming soon!)
+
+### 🔴 Advanced Level
+
+Master complex workflows:
+- Macros and automation
+- Register operations
 - Complex text transformations
-- Multiple file operations
+- Real-world scenarios
 
-**Time commitment**: 60+ minutes
-**Prerequisites**: Intermediate level complete
+**Time to complete**: 60+ minutes
+**Skills needed**: Master intermediate level first
 
-## Getting Started
+👉 **[Explore Advanced Challenges](/practice/advanced-challenges)** (Coming soon!)
 
-Choose your level:
+## Why These Work Better Than Tutorials
 
-- **[Beginner Challenges](/practice/beginner-challenges)** - New to Vim? Start here!
-- **[Intermediate Challenges](/practice/intermediate-challenges)** - Ready to level up?
-- **[Advanced Challenges](/practice/advanced-challenges)** - Master Vim concepts
-- **[Sandbox](/practice/custom-sandbox)** - Free practice area
+| Traditional Tutorials | These Challenges |
+|---|---|
+| Watch someone code | **You code** |
+| Read explanations | **Learn from doing** |
+| Passive learning | **Active practice** |
+| Can't verify learning | **Instant feedback** |
+| Hard to track progress | **Progress tracked** |
+| No confidence metric | **See mastery progress** |
 
-## Tips for Success
+## Progress Tracking
 
-### 1. **Read the Instructions Carefully**
-Each challenge describes exactly what to do. Read the target description.
+Your progress is **automatically saved**:
 
-### 2. **Use Hints Progressively**
-- First hint: Gentle nudge about the approach
-- Second hint: Names the specific command
-- Third hint: Shows the exact solution
+- ✅ Completed challenges marked
+- 📊 Progress bar shows your mastery
+- 🎯 View all completed & remaining challenges
+- 🔄 Can retry anytime to improve
 
-Try to solve without hints first—you'll learn better!
+This is like **keyboard typing tests** - you can see your improvement over time!
 
-### 3. **Remember: Undo is Your Friend**
-You can't break anything. Press `u` to undo any mistake.
+## Tips for Maximum Learning
 
-### 4. **Think About the Grammar**
-Remember: **`[Operator] [Count] [Motion/TextObject]`**
+### 1. **Master One Level Before Moving Up**
+The challenges build skills sequentially. Don't skip!
 
-If a challenge seems confusing, break it down into these components.
+### 2. **Use Hints Strategically**
+- Try first without hints
+- Use hints to understand, not just to pass
+- The best learning comes from struggling a bit
 
-### 5. **Practice Regularly**
-- 15 minutes daily is better than 2 hours once
-- Build muscle memory through repetition
-- After completing a challenge, move on (don't obsess)
+### 3. **Do These Daily**
+- 10-15 minutes daily beats 2 hours once a week
+- Builds muscle memory through repetition
+- Confidence grows over time
 
-## Tracking Your Progress
+### 4. **Challenge Yourself**
+- Try to complete challenges without hints
+- Time yourself (for fun, not stress)
+- Retry challenges to improve speed
 
-Your progress is saved automatically in your browser:
-- ✅ Completed challenges are marked
-- 📊 Your score increases
-- 🔄 You can reset anytime
+### 5. **Connect to Real Vim**
+- After each challenge, practice in real Vim
+- Apply the skill to your actual work
+- This makes learning permanent
 
-**Note**: Progress is stored locally in your browser. Clear browser data and you'll lose it.
+## The Complete Learning Path
 
-## Challenge Structure
+```
+1. Read Getting Started          ← Understand the philosophy
+2. Read Fundamentals            ← Learn theory
+3. Do Beginner Challenges       ← Build muscle memory
+4. Read Intermediate Theory     ← Learn advanced concepts
+5. Do Intermediate Challenges   ← Practice advanced skills
+6. Practice in Real Vim Daily   ← Make it habit
+7. Do Advanced Challenges       ← Optimize workflows
+```
 
-Each challenge includes:
+## Starting Your Journey
 
-- **Title & Description** - What you'll learn
-- **Initial Content** - Starting text
-- **Target** - Desired final state
-- **Instructions** - What to do
-- **Hints** - Get help if stuck
-- **Feedback** - Immediate results
+### If You're Brand New:
+1. **[Getting Started](/getting-started/)** - Understand why Vim exists
+2. **[Fundamentals](/fundamentals/)** - Learn modes and basic navigation
+3. **[Beginner Challenges](./beginner-challenges)** - Practice interactively
 
-## Common Challenges
+### If You Know Some Vim:
+1. **[Beginner Challenges](./beginner-challenges)** - Reinforce fundamentals
+2. **[Intermediate Reading](/intermediate/)** - Learn advanced concepts
+3. **[Intermediate Challenges](./intermediate-challenges)** - Practice advanced skills
 
-### Navigation Challenges
-Learn to move efficiently:
-- Jump to specific characters
-- Move by words and paragraphs
-- Navigate entire files
+### If You're Pretty Good at Vim:
+1. **Jump to [Advanced Challenges](./advanced-challenges)** - Challenge yourself
+2. **Read [Advanced Topics](/advanced/)** - Configuration and scripting
+3. **Build your own workflows** - Use Vim in real projects
 
-### Editing Challenges
-Master text manipulation:
-- Delete and change text
-- Copy and paste
-- Replace words and lines
+---
 
-### Combination Challenges
-Compose operators and motions:
-- Use text objects effectively
-- Chain multiple operations
-- Think in terms of semantic units
+## Get Started Now
 
-## Pro Tips
-
-**Tip 1: Think in Vim Grammar**
-Don't think "select and delete"—think "delete word" (`dw`)
-
-**Tip 2: Use Counts**
-Instead of `ddd`, use `3d` or `3dd`
-
-**Tip 3: Compose Commands**
-Practice combining operators: `d` + `$` = `d$` (delete to line end)
-
-**Tip 4: Learn Patterns**
-Once you know the pattern, you can predict commands you've never seen:
-- `d` = delete
-- `dw` = delete word
-- `di"` = delete inside quotes
-- `dip` = delete inside paragraph
-
-**Tip 5: Muscle Memory**
-Type even if you know the answer. Your fingers need to learn the movements!
-
-## Troubleshooting
-
-### "The editor is confusing"
-The editor simulates Vim but simplified for learning. Focus on learning the real Vim commands—they'll work the same way.
-
-### "I keep forgetting commands"
-Write them down! Or refer to the [Cheatsheet](/reference/cheatsheet). Spaced repetition helps memory.
-
-### "This challenge is too hard"
-Use the hints! There's no penalty for using hints. Understanding is the goal, not struggling.
-
-### "My solution looks right but it's marked wrong"
-Make sure your text exactly matches. Extra spaces or different text will be marked wrong.
-
-## Beyond the Game
-
-After practicing here:
-
-1. **Open Real Vim** - Practice on actual files
-2. **Use in Daily Editing** - Write in Vim, don't just practice
-3. **Read Advanced Sections** - Dive into [Advanced](/advanced/) topics
-4. **Contribute** - Share tips with other learners
-
-## Ready to Start?
-
-Pick your level and begin:
-
-<div style="display: flex; gap: 1rem; flex-wrap: wrap;">
-  <a href="/practice/beginner-challenges" class="nav-link">▶ Beginner Challenges</a>
-  <a href="/practice/intermediate-challenges" class="nav-link">▶ Intermediate Challenges</a>
-  <a href="/practice/advanced-challenges" class="nav-link">▶ Advanced Challenges</a>
-  <a href="/practice/custom-sandbox" class="nav-link">▶ Sandbox</a>
+<div style="display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 2rem;">
+  <a href="/practice/beginner-challenges" style="display: inline-block; padding: 1rem 2rem; background: #ff6b6b; color: white; border-radius: 6px; text-decoration: none; font-weight: 600;">
+    🚀 Start Beginner Challenges
+  </a>
+  <a href="/fundamentals/" style="display: inline-block; padding: 1rem 2rem; background: #4c6ef5; color: white; border-radius: 6px; text-decoration: none; font-weight: 600;">
+    📚 Read Fundamentals First
+  </a>
 </div>
 
 ---

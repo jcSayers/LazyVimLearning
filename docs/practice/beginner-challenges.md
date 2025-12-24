@@ -1,121 +1,69 @@
-# Beginner Challenges
+# Beginner Challenges: Learn by Doing
 
-Practice fundamental Vim commands with these interactive challenges.
+Practice fundamental Vim commands with these interactive challenges. This is where you build muscle memory!
 
-## About This Section
+## How It Works
 
-These challenges teach:
-- Basic navigation with hjkl and word motions
-- Simple editing with delete, change, copy
-- Understanding the grammar of Vim commands
+1. **Select a challenge** from the grid below
+2. **Read the instructions** to understand what to do
+3. **Edit the practice text** to match the goal
+4. **Check your work** - the system will verify if it's correct
+5. **Get hints** if you're stuck (progressive difficulty)
+6. **Move to the next challenge** when complete
 
-Each challenge includes hints if you get stuck.
+## Your Progress is Saved!
 
-## How to Use
-
-1. Read the challenge description
-2. Try to complete it using Vim commands
-3. Click "Check Solution" to verify
-4. Use hints if needed
-5. Move to the next challenge
-
-## Challenge 1: Navigate to End of Line
-
-**Task**: Move cursor to the end of the line
-
-Press the key that moves to the end of the current line.
-
-<ClientOnly>
-  <VimGameEditor :challengeId="'nav-1'" />
-</ClientOnly>
+Your completed challenges are saved in your browser. Come back anytime to continue learning and building confidence.
 
 ---
 
-## Challenge 2: Find Character
-
-**Task**: Jump to the first 'f' in the line
-
-Use the find character command.
-
-<ClientOnly>
-  <VimGameEditor :challengeId="'nav-2'" />
-</ClientOnly>
+<VimPractice />
 
 ---
 
-## Challenge 3: Delete Word
+## Tips for Success
 
-**Task**: Remove the word "quick" from the sentence
+### Tip 1: Read Instructions Carefully
+Each challenge tells you exactly what to do.
 
-Use the delete word command.
+### Tip 2: Use Hints Progressively
+- **Hint 1**: General guidance about the approach
+- **Hint 2**: The specific command name
+- **Hint 3**: Exact steps to follow
 
-<ClientOnly>
-  <VimGameEditor :challengeId="'edit-1'" />
-</ClientOnly>
+Try to solve without hints first - you'll learn better!
 
----
+### Tip 3: Understand the Grammar
+Remember: **`[Operator] [Motion]`**
+- `d` = delete operator
+- `w` = word motion
+- `dw` = delete a word
 
-## Challenge 4: Change Word
+### Tip 4: You Can't Break Anything
+The practice editor just compares text. Hit "Reset" anytime to start over. Mistakes are impossible!
 
-**Task**: Replace "fox" with "cat"
+### Tip 5: Build Muscle Memory
+Type the commands out loud as you do them. Repetition builds automaticity.
 
-Use the change word command, then type the replacement.
+## After Completing These
 
-<ClientOnly>
-  <VimGameEditor :challengeId="'edit-2'" />
-</ClientOnly>
+Once you've mastered beginner challenges:
 
----
+1. **Review [Fundamentals](/fundamentals/)** - Understand the deeper concepts
+2. **Try [Intermediate Challenges](/practice/intermediate-challenges)** - Level up with text objects
+3. **Practice in Real Vim** - Use `vim myfile.txt` and apply these skills
 
-## Challenge 5: Copy Word
+## What These Challenges Teach
 
-**Task**: Copy the word "brown"
-
-Use yank (copy) command to copy text.
-
-<ClientOnly>
-  <VimGameEditor :challengeId="'comb-2'" />
-</ClientOnly>
-
----
-
-## Challenge 6: Word Motion
-
-**Task**: Move to the beginning of "brown"
-
-Practice moving forward by words.
-
-<ClientOnly>
-  <VimGameEditor :challengeId="'nav-3'" />
-</ClientOnly>
+| Challenge | Concept | Real-World Use |
+|-----------|---------|---|
+| Move to End of Line | Basic motion | Position cursor quickly |
+| Delete a Word | Delete operator | Remove unwanted words |
+| Change a Word | Change operator | Replace text in place |
+| Delete Entire Line | Line editing | Remove whole lines |
+| Copy a Word | Yank (copy) | Copy text for pasting |
+| Move Forward | Word motion | Navigate efficiently |
 
 ---
 
-## Challenge 7: Delete Line
-
-**Task**: Remove an entire line
-
-Use the delete line command.
-
-<ClientOnly>
-  <VimGameEditor :challengeId="'edit-3'" />
-</ClientOnly>
-
----
-
-## Tips
-
-- **Get stuck?** Use the hint button
-- **Made a mistake?** Hints will remind you of undo (`u`)
-- **Understand the grammar**: `[Operator][Motion]` = `dw` = delete word
-
-## What's Next?
-
-After completing beginner challenges:
-- Review the [Fundamentals](/fundamentals/) section for deeper understanding
-- Try [Intermediate Challenges](/practice/intermediate-challenges)
-- Practice these commands in real Vim daily
-
----
-
-**Keep going!** You're building skills that will make you 10x faster at editing text.
+**Start with the first challenge and work your way up. Each one teaches a fundamental skill you'll use daily in Vim!**

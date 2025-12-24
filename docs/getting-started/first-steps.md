@@ -1,6 +1,8 @@
-# First Steps: Your First Vim Session
+# First Steps: Your First Session
 
-You've installed Vim. Now let's open it and do something! This page gets you through your first Vim session without panicking.
+You've installed your editor. Now let's open it and do something! This page gets you through your first session without panicking.
+
+<ShowFor editor="vim">
 
 ## Opening Vim
 
@@ -11,6 +13,22 @@ vim
 ```
 
 You should see a welcome screen with helpful tips. This is Vim's Normal mode.
+
+</ShowFor>
+
+<ShowFor editor="neovim">
+
+## Opening Neovim
+
+Open your terminal and type:
+
+```bash
+nvim
+```
+
+You should see Neovim's welcome message. This is Neovim's Normal mode.
+
+</ShowFor>
 
 ### Panic? Here's how to quit:
 
@@ -115,6 +133,8 @@ To **save and quit** in one command:
 
 ## Your First Exercise
 
+<ShowFor editor="vim">
+
 Let's do a real exercise:
 
 1. Open a new file: `vim hello.txt`
@@ -137,6 +157,35 @@ vim hello.txt
 ```
 
 The file opens with your content. You've now written persistent data in Vim!
+
+</ShowFor>
+
+<ShowFor editor="neovim">
+
+Let's do a real exercise:
+
+1. Open a new file: `nvim hello.txt`
+2. Type `i` to enter Insert mode
+3. Type this text:
+   ```
+   I am learning Neovim
+   This is my first file
+   It is not so scary!
+   ```
+4. Press `Esc` to return to Normal mode
+5. Type `:wq` and press Enter to save and quit
+
+Congratulations! You've created and saved a file in Neovim!
+
+### Opening that file again:
+
+```bash
+nvim hello.txt
+```
+
+The file opens with your content. You've now written persistent data in Neovim!
+
+</ShowFor>
 
 ## The Vim Tutor: vimtutor
 

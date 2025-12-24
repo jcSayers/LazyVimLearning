@@ -1,36 +1,50 @@
-# Intermediate Challenges
+# Intermediate Challenges: Level Up
 
-Ready to level up? These challenges cover text objects, advanced motions, and operator combinations.
+Ready to master more complex Vim operations? These challenges teach you advanced editing techniques like text objects, complex motions, and combinations.
 
-## Prerequisites
+> **Prerequisites**: Complete the [Beginner Challenges](/practice/beginner-challenges) first!
 
-- Complete beginner challenges
-- Understand [Text Objects](/intermediate/text-objects)
-- Be comfortable with basic editing
+## What You'll Learn
 
-## Challenge 1: Delete to End of Line
-
-**Task**: Delete everything from cursor to end of line
-
-Combine the delete operator with end-of-line motion.
-
-Try: `d$`
+- **Text Objects** - Change inside/around semantic units
+- **Complex Motions** - Find and navigate precisely
+- **Combinations** - Chain operators with motions
+- **Efficiency** - Do more with fewer keystrokes
 
 ---
 
 ## Coming Soon!
 
-More intermediate challenges covering:
-- Text objects (iw, aw, i", etc.)
-- Advanced motions (f, t, ;, ,)
-- Operator combinations
-- Complex selections
+Intermediate challenges are being developed to cover:
 
-For now, practice:
-- [Fundamentals](/fundamentals/)
-- [Text Objects](/intermediate/text-objects)
-- [Real Vim](https://www.vim.org/docs.php)
+### Intermediate Topics
+- **Text Objects** (`iw`, `aw`, `i"`, `a"`, `ip`, `ap`, etc.)
+- **Operator Combinations** (d2w, c3j, y$, etc.)
+- **Find & Change** (find characters, replace patterns)
+- **Multi-line Operations** (indent, comment, delete blocks)
+- **Registers & Marks** (copy to registers, jump to marks)
+
+### For Now:
+1. **Master the [Beginner Challenges](/practice/beginner-challenges)** first
+2. **Read [Intermediate Content](/intermediate/text-objects)** - Learn the theory
+3. **Practice in Real Vim** - Apply what you learn to actual files
 
 ---
 
-**Tip**: The best practice is using Vim on real files. Work on your own code and configuration files!
+## Progress Path
+
+```
+Beginner Challenges ✓
+        ↓
+Intermediate Theory (Text Objects, Motions)
+        ↓
+Intermediate Challenges (Coming Soon)
+        ↓
+Advanced Challenges (Macros, Complex Workflows)
+        ↓
+Real-World Mastery
+```
+
+---
+
+**Don't skip the beginner section!** Building strong fundamentals is key to becoming a Vim master.

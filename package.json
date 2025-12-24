@@ -1,0 +1,24 @@
+{
+  "name": "vim-neovim-tutorial",
+  "version": "1.0.0",
+  "description": "Comprehensive Vim/Neovim tutorial with interactive practice game, deployable to Netlify",
+  "type": "module",
+  "scripts": {
+    "docs:dev": "vitepress dev docs",
+    "docs:build": "vitepress build docs",
+    "docs:preview": "vitepress preview docs"
+  },
+  "devDependencies": {
+    "vitepress": "^1.0.0",
+    "vue": "^3.4.0"
+  },
+  "dependencies": {
+    "codemirror": "^6.0.1",
+    "@codemirror/state": "^6.4.0",
+    "@codemirror/view": "^6.23.0",
+    "@codemirror/commands": "^6.3.3",
+    "@codemirror/language": "^6.10.0",
+    "@codemirror/lang-javascript": "^6.2.0",
+    "@replit/codemirror-vim": "^6.2.0"
+  }
+}

@@ -4,27 +4,79 @@
       <!-- Challenge Selection -->
       <div v-if="!selectedChallenge" class="challenge-selection">
         <h3>Choose a Challenge</h3>
+
+        <!-- Difficulty Filter -->
+        <div class="difficulty-filter">
+          <button
+            v-for="difficulty in ['beginner', 'intermediate', 'advanced', 'all']"
+            :key="difficulty"
+            :class="['filter-btn', { active: selectedDifficulty === difficulty }]"
+            @click="selectedDifficulty = difficulty as any"
+          >
+            <span v-if="difficulty === 'beginner'">🟢 Beginner</span>
+            <span v-else-if="difficulty === 'intermediate'">🟡 Intermediate</span>
+            <span v-else-if="difficulty === 'advanced'">🔴 Advanced</span>
+            <span v-else>📊 All Levels</span>
+          </button>
+        </div>
+
+        <!-- Progress by Difficulty -->
+        <div class="progress-by-difficulty">
+          <div class="difficulty-progress">
+            <div class="difficulty-label">🟢 Beginner</div>
+            <div class="mini-bar">
+              <div class="mini-fill" :style="{ width: (progressByDifficulty.beginner.completed / progressByDifficulty.beginner.total * 100) + '%' }"></div>
+            </div>
+            <div class="progress-text">{{ progressByDifficulty.beginner.completed }}/{{ progressByDifficulty.beginner.total }}</div>
+          </div>
+          <div class="difficulty-progress">
+            <div class="difficulty-label">🟡 Intermediate</div>
+            <div class="mini-bar">
+              <div class="mini-fill" :style="{ width: (progressByDifficulty.intermediate.completed / progressByDifficulty.intermediate.total * 100) + '%' }"></div>
+            </div>
+            <div class="progress-text">{{ progressByDifficulty.intermediate.completed }}/{{ progressByDifficulty.intermediate.total }}</div>
+          </div>
+          <div class="difficulty-progress">
+            <div class="difficulty-label">🔴 Advanced</div>
+            <div class="mini-bar">
+              <div class="mini-fill" :style="{ width: (progressByDifficulty.advanced.completed / progressByDifficulty.advanced.total * 100) + '%' }"></div>
+            </div>
+            <div class="progress-text">{{ progressByDifficulty.advanced.completed }}/{{ progressByDifficulty.advanced.total }}</div>
+          </div>
+        </div>
+
+        <!-- Challenge Grid -->
         <div class="challenge-grid">
           <button
-            v-for="challenge in challenges"
+            v-for="challenge in filteredChallenges"
             :key="challenge.id"
             :class="['challenge-card', { completed: completedChallenges.includes(challenge.id) }]"
             @click="selectChallenge(challenge)"
           >
             <div class="challenge-name">{{ challenge.title }}</div>
             <div class="challenge-difficulty">{{ challenge.difficulty }}</div>
-            <div v-if="completedChallenges.includes(challenge.id)" class="completed-badge">✓ Complete</div>
+            <div v-if="completedChallenges.includes(challenge.id)" class="completed-badge">✓</div>
           </button>
+        </div>
+
+        <!-- Achievements Section -->
+        <div v-if="achievements.length > 0" class="achievements-section">
+          <h4>🏆 Your Achievements</h4>
+          <div class="achievements-list">
+            <div v-for="achievement in achievements" :key="achievement" class="achievement-badge">
+              {{ achievement }}
+            </div>
+          </div>
         </div>
 
         <!-- Progress Summary -->
         <div class="progress-summary">
-          <h4>Your Progress</h4>
+          <h4>Overall Progress</h4>
           <div class="progress-bar">
             <div
               class="progress-fill"
               :style="{ width: progressPercentage + '%' }"
-            ></div>
+            >{{ progressPercentage }}%</div>
           </div>
           <p>{{ completedChallenges.length }} / {{ challenges.length }} challenges completed</p>
           <button v-if="completedChallenges.length > 0" @click="resetProgress" class="btn-reset">
@@ -111,9 +163,22 @@ interface Challenge {
   difficulty: 'beginner' | 'intermediate' | 'advanced'
 }
 
+interface UserProgress {
+  completedChallenges: string[]
+  challengeDetails: {
+    [key: string]: {
+      completed: boolean
+      hintsUsed: number
+      attempts: number
+      firstCompletedAt: number
+    }
+  }
+}
+
 const challenges: Challenge[] = [
+  // BEGINNER CHALLENGES (6)
   {
-    id: 'nav-1',
+    id: 'beg-nav-1',
     title: 'Move to End of Line',
     instructions: 'Position the cursor at the end of the line using a Vim command.',
     initialContent: 'The quick brown fox jumps',
@@ -127,7 +192,7 @@ const challenges: Challenge[] = [
     ]
   },
   {
-    id: 'edit-1',
+    id: 'beg-edit-1',
     title: 'Delete a Word',
     instructions: 'Remove the word "quick" from the text.',
     initialContent: 'The quick brown fox',
@@ -141,7 +206,7 @@ const challenges: Challenge[] = [
     ]
   },
   {
-    id: 'edit-2',
+    id: 'beg-edit-2',
     title: 'Change a Word',
     instructions: 'Replace "fox" with "cat".',
     initialContent: 'The quick brown fox',
@@ -155,7 +220,7 @@ const challenges: Challenge[] = [
     ]
   },
   {
-    id: 'edit-3',
+    id: 'beg-edit-3',
     title: 'Delete Entire Line',
     instructions: 'Remove the entire first line.',
     initialContent: 'First line to delete\nSecond line stays',
@@ -169,7 +234,7 @@ const challenges: Challenge[] = [
     ]
   },
   {
-    id: 'copy-1',
+    id: 'beg-copy-1',
     title: 'Copy a Word',
     instructions: 'Copy the word "hello" without deleting it.',
     initialContent: 'hello world',
@@ -183,7 +248,7 @@ const challenges: Challenge[] = [
     ]
   },
   {
-    id: 'nav-2',
+    id: 'beg-nav-2',
     title: 'Move Forward Two Words',
     instructions: 'Move cursor forward two words.',
     initialContent: 'The quick brown fox',
@@ -195,6 +260,178 @@ const challenges: Challenge[] = [
       'Use w key to move to next word start',
       'Press w twice to move forward two words'
     ]
+  },
+
+  // INTERMEDIATE CHALLENGES (6)
+  {
+    id: 'int-text-obj-1',
+    title: 'Change Inside Word',
+    instructions: 'Replace "beautiful" with "amazing" using text object.',
+    initialContent: 'This is a beautiful day',
+    targetContent: 'This is a amazing day',
+    targetDescription: '"beautiful" changed to "amazing"',
+    difficulty: 'intermediate',
+    hints: [
+      'Use the iw text object to select inside word',
+      'Use ciw (change inside word) command',
+      'Position on "beautiful", press ciw, type "amazing", press Esc'
+    ]
+  },
+  {
+    id: 'int-text-obj-2',
+    title: 'Delete Word With Surrounding Space',
+    instructions: 'Remove "very" with its surrounding spaces.',
+    initialContent: 'The sky is very blue',
+    targetContent: 'The sky is blue',
+    targetDescription: '"very " has been removed',
+    difficulty: 'intermediate',
+    hints: [
+      'Use aw (around word) to delete word and space',
+      'Use daw command',
+      'Position on "very" and press daw'
+    ]
+  },
+  {
+    id: 'int-text-obj-3',
+    title: 'Change Inside Quotes',
+    instructions: 'Change text inside quotes from "hello" to "goodbye".',
+    initialContent: 'Say "hello" to everyone',
+    targetContent: 'Say "goodbye" to everyone',
+    targetDescription: 'Text inside quotes changed',
+    difficulty: 'intermediate',
+    hints: [
+      'Use i" text object to select inside quotes',
+      'Use ci" (change inside quotes) command',
+      'Position inside quotes, press ci", type "goodbye", press Esc'
+    ]
+  },
+  {
+    id: 'int-motion-1',
+    title: 'Find and Change Character',
+    instructions: 'Move to first "x" and delete it.',
+    initialContent: 'example text x is here',
+    targetContent: 'example text  is here',
+    targetDescription: '"x" has been deleted',
+    difficulty: 'intermediate',
+    hints: [
+      'Use f command to find characters',
+      'Use fx to find "x", then press x to delete it',
+      'Press fx, then x'
+    ]
+  },
+  {
+    id: 'int-combine-1',
+    title: 'Delete Two Words',
+    instructions: 'Delete "the big" from the text.',
+    initialContent: 'I saw the big cat',
+    targetContent: 'I saw cat',
+    targetDescription: '"the big " has been deleted',
+    difficulty: 'intermediate',
+    hints: [
+      'Combine delete operator with motion',
+      'Use d2w to delete two words',
+      'Position before "the" and press d2w'
+    ]
+  },
+  {
+    id: 'int-combine-2',
+    title: 'Delete Paragraph',
+    instructions: 'Remove the entire paragraph.',
+    initialContent: 'First paragraph\nwith multiple\nlines here\n\nSecond paragraph',
+    targetContent: 'Second paragraph',
+    targetDescription: 'First paragraph deleted',
+    difficulty: 'intermediate',
+    hints: [
+      'Use ap (around paragraph) text object',
+      'Use dap to delete paragraph',
+      'Position in first paragraph and press dap'
+    ]
+  },
+
+  // ADVANCED CHALLENGES (6)
+  {
+    id: 'adv-multi-1',
+    title: 'Replace Multiple Words',
+    instructions: 'Replace all "cat" with "dog" on one line.',
+    initialContent: 'The cat saw another cat',
+    targetContent: 'The dog saw another dog',
+    targetDescription: 'All "cat" replaced with "dog"',
+    difficulty: 'advanced',
+    hints: [
+      'Use substitute command with flags',
+      'Use :s/cat/dog/g to replace all on line',
+      'Type :s/cat/dog/g and press Enter'
+    ]
+  },
+  {
+    id: 'adv-multi-2',
+    title: 'Indent Multiple Lines',
+    instructions: 'Indent 3 lines at the start.',
+    initialContent: 'line one\nline two\nline three\nline four',
+    targetContent: '   line one\n   line two\n   line three\nline four',
+    targetDescription: 'First 3 lines indented',
+    difficulty: 'advanced',
+    hints: [
+      'Select lines and use > to indent',
+      'Position on first line, use >2j to indent down',
+      'Press >2j'
+    ]
+  },
+  {
+    id: 'adv-text-obj-combo-1',
+    title: 'Complex Text Object Edit',
+    instructions: 'Change function name inside parentheses.',
+    initialContent: 'result = calculate(x, y, z)',
+    targetContent: 'result = compute(x, y, z)',
+    targetDescription: '"calculate" changed to "compute"',
+    difficulty: 'advanced',
+    hints: [
+      'Find function name and use text object',
+      'Position on function name, use ciw and type new name',
+      'Position on "calculate", press ciw, type "compute", Esc'
+    ]
+  },
+  {
+    id: 'adv-pattern-1',
+    title: 'Find and Replace Pattern',
+    instructions: 'Change "hello world" to "goodbye world".',
+    initialContent: 'hello world is nice\nhello world again',
+    targetContent: 'goodbye world is nice\nhello world again',
+    targetDescription: 'First "hello world" only changed',
+    difficulty: 'advanced',
+    hints: [
+      'Use :s with pattern on current line',
+      'Type :s/hello world/goodbye world/ and press Enter',
+      ':s/hello world/goodbye world/'
+    ]
+  },
+  {
+    id: 'adv-mark-jump-1',
+    title: 'Delete Between Marks',
+    instructions: 'Delete text between two marked positions.',
+    initialContent: 'start of text DELETE THIS end of text',
+    targetContent: 'start of text  end of text',
+    targetDescription: '"DELETE THIS " has been removed',
+    difficulty: 'advanced',
+    hints: [
+      'Mark positions with m and jump with backtick',
+      'Use mm to mark, then select and delete',
+      'Position, press mm, move, press d\'m to delete'
+    ]
+  },
+  {
+    id: 'adv-register-1',
+    title: 'Copy to Register and Paste',
+    instructions: 'Copy word and paste it 3 times.',
+    initialContent: 'Copy word and paste here here here',
+    targetContent: 'Copy word and paste word word word',
+    targetDescription: 'Word pasted 3 times',
+    difficulty: 'advanced',
+    hints: [
+      'Use registers to copy and paste precisely',
+      'Use "aw to copy word to register a',
+      'Position, type "ayw, position, type "ap three times'
+    ]
   }
 ]
 
@@ -205,17 +442,87 @@ const feedbackType = ref<'success' | 'error' | 'info'>('info')
 const currentHint = ref<string | null>(null)
 const hintLevel = ref(0)
 const isSolved = ref(false)
-const completedChallenges = ref<string[]>(() => {
+const selectedDifficulty = ref<'beginner' | 'intermediate' | 'advanced' | 'all'>('beginner')
+const attemptCount = ref(0)
+
+// Enhanced progress tracking
+const userProgress = ref<UserProgress>(() => {
   if (typeof window !== 'undefined') {
     const saved = localStorage.getItem('vimPracticeProgress')
-    return saved ? JSON.parse(saved) : []
+    return saved ? JSON.parse(saved) : { completedChallenges: [], challengeDetails: {} }
   }
-  return []
+  return { completedChallenges: [], challengeDetails: {} }
+})
+
+const completedChallenges = computed(() => userProgress.value.completedChallenges)
+
+const filteredChallenges = computed(() => {
+  if (selectedDifficulty.value === 'all') {
+    return challenges
+  }
+  return challenges.filter(c => c.difficulty === selectedDifficulty.value)
 })
 
 const progressPercentage = computed(() => {
   return Math.round((completedChallenges.value.length / challenges.length) * 100)
 })
+
+const progressByDifficulty = computed(() => {
+  const beginner = challenges.filter(c => c.difficulty === 'beginner')
+  const intermediate = challenges.filter(c => c.difficulty === 'intermediate')
+  const advanced = challenges.filter(c => c.difficulty === 'advanced')
+
+  return {
+    beginner: {
+      completed: completedChallenges.value.filter(id => beginner.some(c => c.id === id)).length,
+      total: beginner.length
+    },
+    intermediate: {
+      completed: completedChallenges.value.filter(id => intermediate.some(c => c.id === id)).length,
+      total: intermediate.length
+    },
+    advanced: {
+      completed: completedChallenges.value.filter(id => advanced.some(c => c.id === id)).length,
+      total: advanced.length
+    }
+  }
+})
+
+// Achievement system
+const achievements = computed(() => {
+  const earned: string[] = []
+
+  // Completion achievements
+  if (progressByDifficulty.value.beginner.completed === progressByDifficulty.value.beginner.total) {
+    earned.push('🟢 Beginner Master')
+  }
+  if (progressByDifficulty.value.intermediate.completed === progressByDifficulty.value.intermediate.total) {
+    earned.push('🟡 Intermediate Master')
+  }
+  if (progressByDifficulty.value.advanced.completed === progressByDifficulty.value.advanced.total) {
+    earned.push('🔴 Advanced Master')
+  }
+  if (completedChallenges.value.length === challenges.length) {
+    earned.push('⭐ Vim Legend')
+  }
+
+  // Skill achievements
+  const noHintChallenges = completedChallenges.value.filter(id => {
+    const detail = userProgress.value.challengeDetails[id]
+    return detail && detail.hintsUsed === 0
+  })
+  if (noHintChallenges.length >= 5) {
+    earned.push('🧠 No Hints Expert')
+  }
+
+  return earned
+})
+
+const saveProgress = () => {
+  if (typeof window !== 'undefined') {
+    localStorage.setItem('vimPracticeProgress', JSON.stringify(userProgress.value))
+  }
+}
 
 const selectChallenge = (challenge: Challenge) => {
   selectedChallenge.value = challenge
@@ -224,20 +531,38 @@ const selectChallenge = (challenge: Challenge) => {
   currentHint.value = null
   hintLevel.value = 0
   isSolved.value = false
+  attemptCount.value = 0
+
+  // Initialize challenge detail if not exists
+  if (!userProgress.value.challengeDetails[challenge.id]) {
+    userProgress.value.challengeDetails[challenge.id] = {
+      completed: false,
+      hintsUsed: 0,
+      attempts: 0,
+      firstCompletedAt: 0
+    }
+  }
 }
 
 const checkSolution = () => {
   if (!selectedChallenge.value) return
+  attemptCount.value++
 
   if (currentContent.value.trim() === selectedChallenge.value.targetContent.trim()) {
     isSolved.value = true
     feedback.value = '✓ Perfect! You solved it!'
     feedbackType.value = 'success'
 
-    // Save progress
+    // Save progress with details
     if (!completedChallenges.value.includes(selectedChallenge.value.id)) {
       completedChallenges.value.push(selectedChallenge.value.id)
-      localStorage.setItem('vimPracticeProgress', JSON.stringify(completedChallenges.value))
+      userProgress.value.challengeDetails[selectedChallenge.value.id] = {
+        completed: true,
+        hintsUsed: hintLevel.value,
+        attempts: attemptCount.value,
+        firstCompletedAt: Date.now()
+      }
+      saveProgress()
     }
   } else {
     feedback.value = `Not quite. Expected: "${selectedChallenge.value.targetContent}" but got: "${currentContent.value}"`
@@ -251,6 +576,12 @@ const showHint = () => {
   if (hintLevel.value < selectedChallenge.value.hints.length) {
     currentHint.value = selectedChallenge.value.hints[hintLevel.value]
     hintLevel.value++
+
+    // Track hint usage
+    if (userProgress.value.challengeDetails[selectedChallenge.value.id]) {
+      userProgress.value.challengeDetails[selectedChallenge.value.id].hintsUsed = hintLevel.value
+      saveProgress()
+    }
   }
 }
 
@@ -261,19 +592,25 @@ const resetChallenge = () => {
   currentHint.value = null
   hintLevel.value = 0
   isSolved.value = false
+  attemptCount.value = 0
 }
 
 const resetProgress = () => {
-  completedChallenges.value = []
+  userProgress.value = { completedChallenges: [], challengeDetails: {} }
   localStorage.removeItem('vimPracticeProgress')
 }
 
 const nextChallenge = () => {
   if (!selectedChallenge.value) return
 
-  const currentIndex = challenges.findIndex(c => c.id === selectedChallenge.value!.id)
-  if (currentIndex < challenges.length - 1) {
-    selectChallenge(challenges[currentIndex + 1])
+  const filteredIds = filteredChallenges.value.map(c => c.id)
+  const currentIndex = filteredIds.indexOf(selectedChallenge.value!.id)
+
+  if (currentIndex < filteredIds.length - 1) {
+    const nextChallenge = challenges.find(c => c.id === filteredIds[currentIndex + 1])
+    if (nextChallenge) {
+      selectChallenge(nextChallenge)
+    }
   } else {
     selectedChallenge.value = null
   }
@@ -605,6 +942,117 @@ const nextChallenge = () => {
   font-size: 1.3rem;
 }
 
+/* Difficulty Filter */
+.difficulty-filter {
+  display: flex;
+  gap: 0.75rem;
+  margin: 1.5rem 0;
+  flex-wrap: wrap;
+}
+
+.filter-btn {
+  padding: 0.6rem 1.2rem;
+  background: var(--vp-c-bg-soft);
+  border: 2px solid var(--vp-c-divider);
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  font-size: 0.95rem;
+}
+
+.filter-btn:hover {
+  border-color: var(--vp-c-brand);
+  background: var(--vp-c-bg);
+}
+
+.filter-btn.active {
+  background: var(--vp-c-brand);
+  color: white;
+  border-color: var(--vp-c-brand);
+}
+
+/* Progress by Difficulty */
+.progress-by-difficulty {
+  background: var(--vp-c-bg-soft);
+  padding: 1.5rem;
+  border-radius: 8px;
+  margin: 1.5rem 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+}
+
+.difficulty-progress {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.difficulty-label {
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.mini-bar {
+  height: 12px;
+  background: var(--vp-c-divider);
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.mini-fill {
+  background: var(--vp-c-brand);
+  height: 100%;
+  transition: width 0.3s ease;
+}
+
+.progress-text {
+  font-size: 0.85rem;
+  color: var(--vp-c-text-2);
+}
+
+/* Achievements */
+.achievements-section {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 2rem;
+  border-radius: 8px;
+  margin: 2rem 0;
+}
+
+.achievements-section h4 {
+  margin-top: 0;
+  font-size: 1.3rem;
+}
+
+.achievements-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.achievement-badge {
+  background: rgba(255, 255, 255, 0.2);
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-weight: 600;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  font-size: 0.95rem;
+}
+
+/* Enhanced Progress Bar */
+.progress-fill {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 0.85rem;
+  font-weight: bold;
+  transition: width 0.4s ease;
+}
+
 /* Responsive */
 @media (max-width: 768px) {
   .challenge-content {
@@ -626,6 +1074,28 @@ const nextChallenge = () => {
 
   .challenge-grid {
     grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  }
+
+  .difficulty-filter {
+    flex-direction: column;
+  }
+
+  .filter-btn {
+    width: 100%;
+  }
+
+  .progress-by-difficulty {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .achievements-list {
+    flex-direction: column;
+  }
+
+  .achievement-badge {
+    width: 100%;
+    text-align: center;
   }
 }
 </style>

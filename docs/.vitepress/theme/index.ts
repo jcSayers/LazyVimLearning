@@ -3,6 +3,7 @@ import type { Theme } from 'vitepress'
 import DefaultTheme from 'vitepress/theme'
 import './custom.css'
 import ToggleEditor from './components/ToggleEditor.vue'
+import ShowFor from './components/ShowFor.vue'
 
 export default {
   extends: DefaultTheme,
@@ -13,5 +14,6 @@ export default {
   },
   enhanceApp({ app }) {
     app.component('ToggleEditor', ToggleEditor)
+    app.component('ShowFor', ShowFor)
   }
 } satisfies Theme

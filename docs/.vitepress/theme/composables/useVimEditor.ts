@@ -1,37 +1,40 @@
-import { ref, computed } from 'vue'
+import { ref, computed, watch } from 'vue'
 
 export type EditorType = 'vim' | 'neovim'
 
+// Global state
 const editorType = ref<EditorType>('vim')
+const isInitialized = ref(false)
 
 export const useVimEditor = () => {
-  // Load saved preference from localStorage
+  // Load saved preference from localStorage (only on client)
   const loadPreference = () => {
-    if (typeof window !== 'undefined') {
+    if (typeof window !== 'undefined' && !isInitialized.value) {
       const saved = localStorage.getItem('vimEditorPreference')
       if (saved === 'neovim' || saved === 'vim') {
         editorType.value = saved
       }
+      isInitialized.value = true
     }
   }
 
   // Save preference to localStorage
-  const savePreference = () => {
+  const savePreference = (type: EditorType) => {
     if (typeof window !== 'undefined') {
-      localStorage.setItem('vimEditorPreference', editorType.value)
+      localStorage.setItem('vimEditorPreference', type)
     }
   }
 
   // Toggle between editors
   const toggleEditor = () => {
-    editorType.value = editorType.value === 'vim' ? 'neovim' : 'vim'
-    savePreference()
+    const newType = editorType.value === 'vim' ? 'neovim' : 'vim'
+    setEditor(newType)
   }
 
   // Set specific editor
   const setEditor = (type: EditorType) => {
     editorType.value = type
-    savePreference()
+    savePreference(type)
   }
 
   // Get editor display name
@@ -77,10 +80,8 @@ export const useVimEditor = () => {
     return commands[platform]?.[editorType.value] || ''
   }
 
-  // Initialize
-  if (typeof window !== 'undefined') {
-    loadPreference()
-  }
+  // Initialize on first use
+  loadPreference()
 
   return {
     editorType,
@@ -94,5 +95,14 @@ export const useVimEditor = () => {
     getInstallCommand,
     loadPreference,
     savePreference,
+  }
+}
+
+// Export for use in components
+export const getEditorType = () => editorType.value
+export const setGlobalEditorType = (type: EditorType) => {
+  editorType.value = type
+  if (typeof window !== 'undefined') {
+    localStorage.setItem('vimEditorPreference', type)
   }
 }
